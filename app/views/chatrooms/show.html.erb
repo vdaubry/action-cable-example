@@ -1,0 +1,28 @@
+<div class="row col-md-8 col-md-offset-2">
+  <h1><%= @chatroom.topic %></h1>
+
+  <div class="panel panel-default">
+    <% if @chatroom.messages.any? %>
+      <div class="panel-body">
+        <table id="messages">
+          <% @chatroom.messages.find_each do |message| %>
+            <tr>
+              <td>
+                <%= message.content %>
+              </td>
+              <td>
+                <%= message.user.username %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <%else%>
+      <div class="panel-body hidden" id="messages">
+      </div>
+    <%end%>
+  </div>
+  <hr>
+
+  <%= render partial: 'messages/form', locals: {message: @message, chatroom: @chatroom}%>
+</div>
